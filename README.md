@@ -14,7 +14,7 @@
   - brightness control through measurement of ambient light 
   - power saving with passive Infrared-Module and Person Detection
 
-  **_NEW! Built as MQTT-Client using pbsubclient by Nick O'Leary._**
+  **_NEW! Built as MQTT-Client using pubsubclient by Nick O'Leary._**
 
 
 **Hardware:**
@@ -28,7 +28,7 @@
   
 **Software:**
 
-- Arduino IDE with Extension for ESP8266 boards
+- Arduino IDE with Package for ESP8266 boards
 - libraries: Fabrice Weinberg's 'NTPClient', Nick O'Leary's 'pubsubclient', Daniel Garcia's 'FastLED'
 
 
