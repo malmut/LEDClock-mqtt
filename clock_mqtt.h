@@ -24,8 +24,8 @@ PubSubClient mqttClient(wifiClient);
 #define TELE_TOPIC_STATUS_SCHEME "tele/ledclock/status/scheme"
 #define TELE_TOPIC_STATUS_USAGE "tele/ledclock/status/usage"
 
-void callbackMQTT(char* topic, byte* payload, unsigned int length);
-void reconnectMQTT();
-void publishState(); 
+void mqttCallback(char* topic, byte* payload, unsigned int length);
+void mqttReconnect();
+void mqttPublish(); 
 
 #endif

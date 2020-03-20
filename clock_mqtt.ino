@@ -9,7 +9,7 @@
 
 #include "clock_mqtt.h"
 
-void callbackMQTT(char* topic,byte* payload, unsigned int length) {
+void mqttCallback(char* topic,byte* payload, unsigned int length) {
 
   payload[length] = '\0';
   String strValue = String((char*)payload);
@@ -67,21 +67,20 @@ void callbackMQTT(char* topic,byte* payload, unsigned int length) {
             SHUTOFF
             state = INSTANTOFF;
 #ifdef DEBUG
-            Serial.println("Instant off.");
+            Serial.println("Power off.");
 #endif
        }
        else {
-           if(state != ON) state = ON;
-           else SHUTOFF
+            state = ON;
 #ifdef DEBUG
-           Serial.println("Toggle Power");
+            Serial.println("Power on");
 #endif
        }
   }
 
   else if(strcmp(topic, CMND_TOPIC_HELP) == 0) {
           mqttClient.publish(TELE_TOPIC_STATUS_USAGE,"-t power -m 0:instant off 1:toggle"); 
-          mqttClient.publish(TELE_TOPIC_STATUS_USAGE,"-t scheme -m 195:day 196:sky 197:spring 198:night 199:aqua"); 
+          mqttClient.publish(TELE_TOPIC_STATUS_USAGE,"-t scheme -m 194:crimson 195:day 196:violet 197:spring 198:night 199:aqua"); 
           mqttClient.publish(TELE_TOPIC_STATUS_USAGE,"-t mode -m 164:classic 165:minarc 166:arc 167:rainbow 168:update");         
    
 #ifdef DEBUG
@@ -111,11 +110,18 @@ void callbackMQTT(char* topic,byte* payload, unsigned int length) {
           Serial.println("Clock scheme SPRING");
 #endif
        }
-                  
-       else if (intValue == SKY) {
-          scheme = SKY;
+
+       else if (intValue == CRIMSON) {
+          scheme = CRIMSON;
 #ifdef DEBUG
-          Serial.println("Clock scheme SKY");
+          Serial.println("Clock scheme CRIMSON");
+#endif
+       }
+                  
+       else if (intValue == VIOLET) {
+          scheme = VIOLET;
+#ifdef DEBUG
+          Serial.println("Clock scheme VIOLET");
 #endif
        }
 
@@ -143,13 +149,13 @@ void callbackMQTT(char* topic,byte* payload, unsigned int length) {
   // show some feedback
   colorWipe(rgbHour, 5);
   mqttClient.publish(TELE_TOPIC_STATUS, msg);
-  publishState();
+  mqttPublish();
   blackWipe(3);
 
 }
 
-void reconnectMQTT() {
-  while (!mqttClient.connected()) {
+void mqttReconnect() {
+//  while (!mqttClient.connected()) {
 #ifdef DEBUG
     Serial.println("Connecting to MQTT..."); 
 #endif
@@ -160,7 +166,7 @@ void reconnectMQTT() {
       Serial.println("MQTT connected");  
 #endif
       mqttClient.publish(TELE_TOPIC_STATUS, "Hello from LEDClock");
-      publishState();
+      mqttPublish();
       mqttClient.subscribe(CMND_TOPIC);
     } 
     else {
@@ -169,12 +175,12 @@ void reconnectMQTT() {
       Serial.print("failed with state ");
       Serial.println(mqttClient.state());
 #endif
-      delay(100);
+      delay(10);
      }
-  }
+  //}
 }
 
-void publishState() {
+void mqttPublish() {
  char pl[4];
  sprintf(pl,"%i", mode);
  mqttClient.publish(TELE_TOPIC_STATUS_MODE, pl);

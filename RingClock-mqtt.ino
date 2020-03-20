@@ -100,7 +100,7 @@ void setup() {
 
   // start MQTT client
   mqttClient.setServer(mqttServer, mqttPort);     //start mqtt-server
-  mqttClient.setCallback(callbackMQTT);
+  mqttClient.setCallback(mqttCallback);
 
   // start I2C
   Wire.begin(SDA, SCL);
@@ -147,12 +147,7 @@ void loop() {
   ArduinoOTA.handle();
   delay (300);
 
-  // handle mqtt Input
-  if (!mqttClient.connected())  {
-     reconnectMQTT();
-  }
-  mqttClient.loop();
-  delay (300);
+
   
   // get time from RTC
   DateTime now = Rtc.now();
@@ -245,4 +240,13 @@ void loop() {
   }
 
   delay(300);
+  
+  // handle mqtt Input
+  if(s%10 == 0) {
+    if (!mqttClient.connected()) mqttReconnect(); 
+  }
+  mqttClient.loop();
+  delay(300);
+
+
 }

@@ -16,9 +16,10 @@
 #define RGB RgbColor
 #endif
 
-#define USER 194
+#define USER 193
+#define CRIMSON 194
 #define DAY 195
-#define SKY 196
+#define VIOLET 196
 #define SPRING 197
 #define NIGHT 198
 #define AQUA 199

@@ -18,20 +18,20 @@ void defineColorScheme(byte scheme) {
 
     default:
 
-    case SKY:
+    case VIOLET:
       rgbDivisions = RGB(112, 180, 242); // light blue
       rgbBackground = RGB(0, 0, 0);      // black
       rgbHour = RGB(245, 216, 0);        // dark yellow
-      rgbMinute = RGB(53, 53, 98);       // violet blue
-      rgbSecond = RGB(0, 240, 12);       // dark green
+      rgbMinute = RGB(0, 240, 12);       // dark green
+      rgbSecond = RGB(53, 53, 98);       // violet blue
       break;
 
     case SPRING:
 
       rgbDivisions = RGB(115, 158, 5);   // moose green
       rgbBackground = RGB(0, 0, 0);      // black
-      rgbHour = RGB(180, 100, 0);        // dark crimson
-      rgbMinute = RGB(96, 224, 0);       // moose green
+      rgbHour = RGB(180, 100, 0);        // dark orange
+      rgbMinute = RGB(96, 248, 0);       // dark green
       rgbSecond = RGB(250, 230, 10);     // gold
       break;
 
@@ -49,9 +49,19 @@ void defineColorScheme(byte scheme) {
       rgbDivisions = RGB(5, 248, 127);   // turqoise  
       rgbBackground = RGB(0, 0, 0);      // black
       rgbHour = RGB(250, 120, 4);        // dark orange
-      rgbMinute = RGB(24, 208, 228);     // blue
-      rgbSecond = RGB(215, 188, 0);      // light orange
+      rgbMinute = RGB(215, 188, 0);      // light orange
+      rgbSecond = RGB(24, 208, 248);     // dark blue
       break;
+
+    case CRIMSON:
+
+      rgbDivisions = RGB(248,248,22);    // yellow
+      rgbBackground = RGB(0, 0, 0);      // black
+      rgbHour = RGB(248, 22, 22);        // crimson
+      rgbMinute = RGB(22, 248, 22);      // green
+      rgbSecond = RGB(248, 128, 22);     // light orange
+      break;
+
 
     case DAY:
 
